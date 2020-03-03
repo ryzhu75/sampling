@@ -1,0 +1,31 @@
+---
+title: "sampling"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(googlesheets4)
+library(fs)
+library(tidyverse)
+library(dplyr)
+library(janitor)
+```
+
+## R Markdown
+
+```{r read in sheets}
+
+sheets_deauth()
+
+x <- read_sheet("https://docs.google.com/spreadsheets/d/14HmwN2cEVAJHupuehCuLdwG9BXtR3COrxDgaaylLhkA/edit#gid=0") %>% 
+  clean_names()
+
+x %>% 
+  arrange(desc(red))
+
+x %>% 
+  ggplot(aes(x = percent_red)) +
+  geom_bar(bins = 20) 
+
+```
